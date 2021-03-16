@@ -35,7 +35,7 @@ namespace PizzaBox.Domain.Abstracts
     {
       AddCrust();
       AddSize();
-      AddToppings();
+      //AddToppings();
 
     }
 

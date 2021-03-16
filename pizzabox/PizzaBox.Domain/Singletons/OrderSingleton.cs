@@ -14,7 +14,9 @@ namespace PizzaBox.Domain.Singletons
   public class OrderSingleton
   {
     private static OrderSingleton _orderSingleton;
-        private readonly string _path = @"order.xml";
+
+    public List<Order> myOrders {get; set;}
+    private readonly string _path = @"order.xml";
     public static OrderSingleton Instance
     {
       get
@@ -33,31 +35,34 @@ namespace PizzaBox.Domain.Singletons
     /// </summary>
     private OrderSingleton()  //reading from xml
     {
+      var fs = new FileStorage();
+      
+      if(myOrders == null){
+        myOrders = fs.ReadFromXml<Order>(_path).ToList();
+      }
         
     }
 
-    public Order readOrderList(){
-        System.Xml.Serialization.XmlSerializer reader =
-        new System.Xml.Serialization.XmlSerializer(typeof(Order));  
-        System.IO.StreamReader file = new System.IO.StreamReader( _path);  
-        Order overview =  (Order)reader.Deserialize(file);  
-        file.Close();
+    // public Order readOrderList(){
+    //     System.Xml.Serialization.XmlSerializer reader =
+    //     new System.Xml.Serialization.XmlSerializer(typeof(Order));  
+    //     System.IO.StreamReader file = new System.IO.StreamReader( _path);  
+    //     Order overview =  (Order)reader.Deserialize(file);  
+    //     file.Close();
 
-        return overview; 
-    }
+    //     return overview; 
+    // }
     public void Seeding(Order order)  //writing to xml
     {
+        var orders = new List<Order>();
+        foreach(var ord in myOrders){
+          orders.Add(ord);
+        }
+        orders.Add(order);
 
-        System.Xml.Serialization.XmlSerializer writer =
-            new System.Xml.Serialization.XmlSerializer(typeof(Order));  
-  
-         
-        System.IO.FileStream file = System.IO.File.Create(_path);  
-
-        System.Console.WriteLine(_orderSingleton);
-  
-        writer.Serialize(file, order);  
-        file.Close(); 
+        var fs = new FileStorage();
+        fs.WriteToXml<Order>(orders, _path);
+        myOrders = fs.ReadFromXml<Order>(_path).ToList();
     }
 
   }

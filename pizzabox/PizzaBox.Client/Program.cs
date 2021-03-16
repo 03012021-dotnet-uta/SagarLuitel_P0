@@ -23,6 +23,7 @@ namespace PizzaBox.Client
 
         List<Size> sizes = SizeSingleton.Instance.mySize;
         List<Topping> toppings = ToppingSingleton.Instance.topping;
+
         List<APizza> myOrder = new List<APizza>();
         static void Main(string[] args)
         {
@@ -32,7 +33,6 @@ namespace PizzaBox.Client
             System.Console.WriteLine("******************************************************************************");
             Console.WriteLine();
 
-            
             Console.WriteLine("IF YOUR ARE OUR CUSTOMER PLEASE ENTER 1");
             Console.WriteLine("IF YOUR ARE ONE OF OUR STORE MANAGERS ENTER 2");
             Console.WriteLine("TO EXIT THE APPLICATION ENTER 0");
@@ -45,10 +45,7 @@ namespace PizzaBox.Client
             }
             if (userIn == "2")
             {
-                //store manage
-            }
-            if(userIn != "0"){
-                Console.WriteLine("Please Enter A Valid Option");
+                AsStore();
             }
 
             //For seeding.
@@ -64,6 +61,10 @@ namespace PizzaBox.Client
             //  var pizzaS = PizzaSingleton.Instance;
             //  pizzaS.Seeding();
 
+            // var ss = StoreSingleton.Instance;
+            // ss.Seeding();
+
+
         }
 
         /// <summary>
@@ -74,9 +75,6 @@ namespace PizzaBox.Client
         {
             Program p = new Program();
 
-            // var ss = StoreSingleton.Instance;
-
-            // ss.Seeding();
 
             // // print all the stores available, must be from file or db
             // foreach (var item in ss.Stores)
@@ -84,7 +82,8 @@ namespace PizzaBox.Client
             //   System.Console.WriteLine(item);
             // }
             int input;
-            do{
+            do
+            {
                 System.Console.WriteLine();
                 System.Console.WriteLine("Select your Store ");
 
@@ -97,11 +96,12 @@ namespace PizzaBox.Client
 
                 // select a store
                 input = Convert.ToInt32(Console.ReadLine());
-                if(input != 1 && input != 2){
+                if (input != 1 && input != 2)
+                {
                     Console.WriteLine("Please Enter A Valid Option");
                 }
-            }while(input != 1 && input != 2);
-            
+            } while (input != 1 && input != 2);
+
             int input2 = 3;
             do
             {
@@ -125,19 +125,20 @@ namespace PizzaBox.Client
                         p.orderlist();
                         break;
                     case 3:
-                        p.checkOut(StoreSingleton.Instance.Stores[input-1].Name); //to chechout 
+                        p.checkOut(StoreSingleton.Instance.Stores[input - 1].Name); //to chechout 
                         break;
                     case 4:
                         p.orderHistory();
                         break;
-                    case 5: 
+                    case 5:
                         Console.WriteLine("Good Bye! ");
                         break;
-                    default:
-                        Console.WriteLine("Please Enter A Valid Option");
-                        break;
-                }
 
+                }
+                if(input2 != 5){
+                    Console.WriteLine("Please Enter A Valid Option");
+                    break;
+                }
             } while (input2 != 5);
         }
 
@@ -182,9 +183,10 @@ namespace PizzaBox.Client
             var toppings = new Dictionary<string, double>{ {"Onion", 0.20}, {"Green Peppers", 0.20}, {"Mushrooms", 0.20}, {"Extra Cheese", 0.50},
                                                        {"Black olives", 0.50}, {"Pepperoni", 1.00}, {"Sausage", 1.00}, {"Bacon", 1.00}};
             int t;
-            
-            
-            for(int i = 0; i < 4; i++){
+
+
+            for (int i = 0; i < 4; i++)
+            {
                 Console.WriteLine();
                 Console.WriteLine("Choose Up To 4 Toppings ");
                 Console.WriteLine("Choose a Topping: ");
@@ -201,15 +203,17 @@ namespace PizzaBox.Client
                 Console.WriteLine("0: Done Adding Toppings");
 
                 t = Convert.ToInt32(Console.ReadLine());
-                if(t == 0){
+                if (t == 0)
+                {
                     break;
                 }
                 else if (t > 0 && t < 9)
-                {   
+                {
                     cPizza.Toppings[i].Name = toppings.ElementAt(t - 1).Key;
                     cPizza.Toppings[i].Price = toppings.ElementAt(t - 1).Value;
                 }
-                else{
+                else
+                {
                     Console.WriteLine("Please select a valid option");
                     --i;
                 }
@@ -227,7 +231,7 @@ namespace PizzaBox.Client
 
         void Options(APizza cPizza)
         {
-            
+
             System.Console.WriteLine();
             Console.WriteLine("Choose a Crust: ");
             Console.WriteLine("1: Thick ------- $ 0.5 ");
@@ -278,7 +282,7 @@ namespace PizzaBox.Client
             }
         }
 
-         void checkOut(string StoreName)
+        void checkOut(string StoreName)
         {
             Customer customer = new Customer();
             Order order = new Order(myOrder);
@@ -307,10 +311,10 @@ namespace PizzaBox.Client
 
             os.Seeding(order);
 
-            //Console.WriteLine("Please Enter your Card Number: ");
         }
 
-        void orderlist(){
+        void orderlist()
+        {
             Order order = new Order(myOrder);
             var total = order.calcTotal();
             Console.WriteLine();
@@ -322,24 +326,58 @@ namespace PizzaBox.Client
 
             Console.WriteLine("Your Total:  $" + total);
         }
-        void orderHistory(){
+        void orderHistory()
+        {
+            Console.WriteLine();
             Console.WriteLine("Plese Enter your Email ");
             var email = Console.ReadLine();
 
-            var sinOrd = OrderSingleton.Instance;
+            List<Order> ordersList = OrderSingleton.Instance.myOrders;
 
-            var order = sinOrd.readOrderList();
-
-            if(email.Equals(order.customerEmail)){
-                Console.WriteLine("Store: " + order.StoreName);
-                foreach(var p in order.Pizzas){
-                    Console.WriteLine(p.Size.Name+ " " + p.Name + " " + p.Crust.Name + " Crust with");
-                    foreach(var t in p.Toppings){
-                        Console.Write(t.Name + " ");
+            foreach (var order in ordersList)
+            {
+                if (email.Equals(order.customerEmail))
+                {
+                    Console.WriteLine("Store: " + order.StoreName);
+                    
+                    foreach (var p in order.Pizzas)
+                    {
+                        Console.WriteLine(p.Size.Name + " " + p.Name + " " + p.Crust.Name + " Crust with");
+                        foreach (var t in p.Toppings)
+                        {
+                            Console.Write(t.Name + " ");
+                        }
                     }
-              }
-                var mytotal = order.calcTotal();
-                Console.WriteLine("Total: $ " + mytotal);
+                    Console.WriteLine();
+                    var mytotal = order.calcTotal();
+                    Console.WriteLine("Total: $ " + mytotal);
+                }
+
+            }
+        }
+
+
+        public static void AsStore()
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("Select your Store ");
+
+            int n = 0;
+            foreach (var store in StoreSingleton.Instance.Stores)
+            {
+                Console.WriteLine(++n + ": " + store);
+            }
+            int x = Convert.ToInt32(Console.ReadLine());
+
+            List<Order> ordersList = OrderSingleton.Instance.myOrders;
+            Console.WriteLine("Here is the list of Customer with their orders for your store.");
+            foreach(var order in ordersList){
+                if(order.StoreName == StoreSingleton.Instance.Stores[x-1].Name){
+                    Console.WriteLine("Customer Email: " + order.customerEmail);
+                    foreach(var p in order.Pizzas){
+                        Console.WriteLine("Pizza: " + p.Name);
+                    }
+                }
             }
             
         }
