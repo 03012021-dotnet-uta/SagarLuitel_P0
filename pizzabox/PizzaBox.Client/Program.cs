@@ -19,6 +19,10 @@ namespace PizzaBox.Client
 
         List<APizza> pizzas = PizzaSingleton.Instance.Pizzas;
 
+        List<Crust> crusts = CrustSingleton.Instance.Crusts;
+
+        List<Size> sizes = SizeSingleton.Instance.mySize;
+        List<Topping> toppings = ToppingSingleton.Instance.topping;
         List<APizza> myOrder = new List<APizza>();
         static void Main(string[] args)
         {
@@ -28,7 +32,7 @@ namespace PizzaBox.Client
             System.Console.WriteLine("******************************************************************************");
             Console.WriteLine();
 
-
+            
             Console.WriteLine("IF YOUR ARE OUR CUSTOMER PLEASE ENTER 1");
             Console.WriteLine("IF YOUR ARE ONE OF OUR STORE MANAGERS ENTER 2");
             Console.WriteLine("TO EXIT THE APPLICATION ENTER 0");
@@ -43,6 +47,22 @@ namespace PizzaBox.Client
             {
                 //store manage
             }
+            if(userIn != "0"){
+                Console.WriteLine("Please Enter A Valid Option");
+            }
+
+            //For seeding.
+            // var size = SizeSingleton.Instance;
+            // size.Seeding();
+
+            // var crust = CrustSingleton.Instance;
+            // crust.Seeding();
+
+            // var topping = ToppingSingleton.Instance;
+            // topping.Seeding();
+
+            //  var pizzaS = PizzaSingleton.Instance;
+            //  pizzaS.Seeding();
 
         }
 
@@ -63,19 +83,25 @@ namespace PizzaBox.Client
             // {
             //   System.Console.WriteLine(item);
             // }
-            System.Console.WriteLine();
-            System.Console.WriteLine("Select your Store ");
+            int input;
+            do{
+                System.Console.WriteLine();
+                System.Console.WriteLine("Select your Store ");
 
-            int n = 0;
+                int n = 0;
 
-            foreach (var store in StoreSingleton.Instance.Stores)
-            {
-                Console.WriteLine(++n + ": " + store);
-            }
+                foreach (var store in StoreSingleton.Instance.Stores)
+                {
+                    Console.WriteLine(++n + ": " + store);
+                }
 
-            // select a store
-            int input = Convert.ToInt32(Console.ReadLine());
-
+                // select a store
+                input = Convert.ToInt32(Console.ReadLine());
+                if(input != 1 && input != 2){
+                    Console.WriteLine("Please Enter A Valid Option");
+                }
+            }while(input != 1 && input != 2);
+            
             int input2 = 3;
             do
             {
@@ -99,20 +125,25 @@ namespace PizzaBox.Client
                         p.orderlist();
                         break;
                     case 3:
-                        p.checkOut(StoreSingleton.Instance.Stores[input].Name); //to chechout 
+                        p.checkOut(StoreSingleton.Instance.Stores[input-1].Name); //to chechout 
                         break;
                     case 4:
                         p.orderHistory();
                         break;
+                    case 5: 
+                        Console.WriteLine("Good Bye! ");
+                        break;
+                    default:
+                        Console.WriteLine("Please Enter A Valid Option");
+                        break;
                 }
 
-            } while (input2 == 5);
+            } while (input2 != 5);
         }
 
         public void placeOrder()
         {
-            //  var pizzaS = PizzaSingleton.Instance;
-            //  pizzaS.Seeding();
+            Console.WriteLine();
             int i = 0;
             foreach (var pizza in pizzas)
             {
@@ -135,6 +166,9 @@ namespace PizzaBox.Client
                 case "4":
                     preSetPizza(pizzas[Convert.ToInt32(input3) - 1]);
                     break;
+                default:
+                    Console.WriteLine("Please Select A Valid Option");
+                    break;
             }
 
         }
@@ -148,10 +182,11 @@ namespace PizzaBox.Client
             var toppings = new Dictionary<string, double>{ {"Onion", 0.20}, {"Green Peppers", 0.20}, {"Mushrooms", 0.20}, {"Extra Cheese", 0.50},
                                                        {"Black olives", 0.50}, {"Pepperoni", 1.00}, {"Sausage", 1.00}, {"Bacon", 1.00}};
             int t;
-            int i = 0;
-            do
-            {
+            
+            
+            for(int i = 0; i < 4; i++){
                 Console.WriteLine();
+                Console.WriteLine("Choose Up To 4 Toppings ");
                 Console.WriteLine("Choose a Topping: ");
                 Console.WriteLine();
                 Console.WriteLine("1: Onion --------------- $ 0.20 ");
@@ -166,14 +201,19 @@ namespace PizzaBox.Client
                 Console.WriteLine("0: Done Adding Toppings");
 
                 t = Convert.ToInt32(Console.ReadLine());
-
-                if (t != 0)
-                {
+                if(t == 0){
+                    break;
+                }
+                else if (t > 0 && t < 9)
+                {   
                     cPizza.Toppings[i].Name = toppings.ElementAt(t - 1).Key;
                     cPizza.Toppings[i].Price = toppings.ElementAt(t - 1).Value;
                 }
-                i++;
-            } while (t != 0);
+                else{
+                    Console.WriteLine("Please select a valid option");
+                    --i;
+                }
+            }
 
             myOrder.Add(cPizza);
         }
@@ -181,12 +221,64 @@ namespace PizzaBox.Client
         // Pre set pizzas if customer wanna order already made pizzas 
         void preSetPizza(APizza pizza)
         {
-            Console.WriteLine(pizza.Name);
             Options(pizza);
             myOrder.Add(pizza);
         }
 
-        void checkOut(string StoreName)
+        void Options(APizza cPizza)
+        {
+            
+            System.Console.WriteLine();
+            Console.WriteLine("Choose a Crust: ");
+            Console.WriteLine("1: Thick ------- $ 0.5 ");
+            Console.WriteLine("2: Thin  ------- $ 0.3 ");
+            int c = Convert.ToInt32(Console.ReadLine());
+            switch (c)
+            {
+                case 1:
+                    cPizza.Crust.Name = crusts[0].Name;
+                    cPizza.Crust.Price = crusts[0].Price;
+                    break;
+                case 2:
+                    cPizza.Crust.Name = crusts[1].Name;
+                    cPizza.Crust.Price = crusts[1].Price;
+                    break;
+
+                default:
+                    Console.WriteLine("Please Enter A valid Option");
+                    break;
+            }
+
+            System.Console.WriteLine();
+            Console.WriteLine("Choose a Size: ");
+            Console.WriteLine("1: Small -------- $ 7.00 ");
+            Console.WriteLine("2: Medium ------- $ 9.99 ");
+            Console.WriteLine("3: Large -------- $ 12.95 ");
+
+            int s = Convert.ToInt32(Console.ReadLine());
+            switch (s)
+            {
+                case 1:
+                    cPizza.Size.Name = sizes[0].Name;
+                    cPizza.Size.Price = sizes[0].Price;
+                    break;
+                case 2:
+                    cPizza.Size.Name = sizes[1].Name;
+                    cPizza.Size.Price = sizes[1].Price;
+                    break;
+
+                case 3:
+                    cPizza.Size.Name = sizes[2].Name;
+                    cPizza.Size.Price = sizes[2].Price;
+                    break;
+
+                default:
+                    Console.WriteLine("Please Enter A valid Option");
+                    break;
+            }
+        }
+
+         void checkOut(string StoreName)
         {
             Customer customer = new Customer();
             Order order = new Order(myOrder);
@@ -216,61 +308,6 @@ namespace PizzaBox.Client
             os.Seeding(order);
 
             //Console.WriteLine("Please Enter your Card Number: ");
-        }
-
-
-        void Options(APizza cPizza)
-        {
-            System.Console.WriteLine();
-            Console.WriteLine("Choose a Crust: ");
-            Console.WriteLine("1: Thick ------- $ 0.5 ");
-            Console.WriteLine("2: Thin  ------- $ 0.3 ");
-            int c = Convert.ToInt32(Console.ReadLine());
-            switch (c)
-            {
-                case 1:
-                    cPizza.Crust.Name = "Thick";
-                    cPizza.Crust.Price = 0.5;
-                    break;
-                case 2:
-                    cPizza.Crust.Name = "Thin";
-                    cPizza.Crust.Price = 0.3;
-                    break;
-
-                default:
-                    cPizza.Crust.Name = "Thick";
-                    cPizza.Crust.Price = 0.5;
-                    break;
-            }
-
-            System.Console.WriteLine();
-            Console.WriteLine("Choose a Size: ");
-            Console.WriteLine("1: Small -------- $ 7.00 ");
-            Console.WriteLine("2: Medium ------- $ 9.99 ");
-            Console.WriteLine("3: Large -------- $ 12.95 ");
-
-            int s = Convert.ToInt32(Console.ReadLine());
-            switch (s)
-            {
-                case 1:
-                    cPizza.Size.Name = "Small";
-                    cPizza.Size.Price = 7.00;
-                    break;
-                case 2:
-                    cPizza.Size.Name = "Medium";
-                    cPizza.Size.Price = 9.99;
-                    break;
-
-                case 3:
-                    cPizza.Size.Name = "Large";
-                    cPizza.Size.Price = 12.95;
-                    break;
-
-                default:
-                    cPizza.Size.Name = "Medium";
-                    cPizza.Size.Price = 9.99;
-                    break;
-            }
         }
 
         void orderlist(){

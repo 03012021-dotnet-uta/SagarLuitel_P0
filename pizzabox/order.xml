@@ -12,12 +12,12 @@
       </Size>
       <Toppings>
         <Topping>
-          <Name>Green Peppers</Name>
-          <Price>0.2</Price>
+          <Name>Extra Cheese</Name>
+          <Price>0.5</Price>
         </Topping>
         <Topping>
-          <Name>Onion</Name>
-          <Price>0.2</Price>
+          <Name />
+          <Price>0</Price>
         </Topping>
         <Topping>
           <Name />
@@ -31,6 +31,6 @@
       <Name>Custom Pizza</Name>
     </APizza>
   </Pizzas>
-  <StoreName>NewYork Store</StoreName>
-  <customerEmail>sagar@ym.com</customerEmail>
+  <StoreName>Chicago Store</StoreName>
+  <customerEmail>sagar1@gm.com</customerEmail>
 </Order>

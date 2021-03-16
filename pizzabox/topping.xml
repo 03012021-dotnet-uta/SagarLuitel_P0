@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTopping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Topping>
+    <Name>Onion</Name>
+    <Price>0.02</Price>
+  </Topping>
+  <Topping>
+    <Name>Green Peppers</Name>
+    <Price>0.2</Price>
+  </Topping>
+  <Topping>
+    <Name>Mushrooms</Name>
+    <Price>0.3</Price>
+  </Topping>
+  <Topping>
+    <Name>Extra Cheese</Name>
+    <Price>0.5</Price>
+  </Topping>
+  <Topping>
+    <Name>Black Olives</Name>
+    <Price>0.5</Price>
+  </Topping>
+  <Topping>
+    <Name>Pepperoni</Name>
+    <Price>1</Price>
+  </Topping>
+  <Topping>
+    <Name>Sausage</Name>
+    <Price>1</Price>
+  </Topping>
+  <Topping>
+    <Name>Bacon</Name>
+    <Price>1</Price>
+  </Topping>
+</ArrayOfTopping>
