@@ -29,7 +29,7 @@ namespace PizzaBox.Testing.Tests
       Assert.Equal(expected, actual);
     }
 
-        [Fact]
+    [Fact]
     public void Test_OrderEmail_Fact()
     {
         
@@ -52,24 +52,5 @@ namespace PizzaBox.Testing.Tests
       // assert
       Assert.Equal(expected, actual);
     }
-
-    [Theory]
-    [InlineData("Custom Pizza")]
-    [InlineData("")]
-    public void Test_CustomPizza_Theory(string expected)
-    {
-      // arrange
-      var sut = new CustomPizza();
-
-      // act
-      var actual = sut.Name;
-
-      // assert
-      Assert.Equal(expected, actual);
-    }
-
-
-
-
   }
 }

@@ -21,7 +21,6 @@ namespace PizzaBox.Testing.Tests
 
     [Theory]
     [InlineData("Custom Pizza")]
-    [InlineData("")]
     public void Test_CustomPizza_Theory(string expected)
     {
       // arrange
@@ -54,6 +53,20 @@ namespace PizzaBox.Testing.Tests
       // arrange
       var sut = new VeggiePizza();
       var expected = "Veggie Pizza";
+
+      // act
+      var actual = sut.Name;
+
+      // assert
+      Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void Test_CheesePizza_Fact()
+    {
+      // arrange
+      var sut = new CheesePizza();
+      var expected = "Cheese Pizza";
 
       // act
       var actual = sut.Name;

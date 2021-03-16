@@ -21,7 +21,6 @@ namespace PizzaBox.Testing.Tests
 
     [Theory]
     [InlineData("Chicago Store")]
-    [InlineData("")]
     public void Test_ChicagoStore_Theory(string expected)
     {
       // arrange
