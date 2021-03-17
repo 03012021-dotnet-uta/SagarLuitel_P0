@@ -61,6 +61,38 @@
             <Price>0</Price>
           </Topping>
           <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
             <Name>Extra Cheese</Name>
             <Price>0.5</Price>
           </Topping>
@@ -95,6 +127,14 @@
           <Price>13.75</Price>
         </Size>
         <Toppings>
+          <Topping>
+            <Name>Pepperoni</Name>
+            <Price>1</Price>
+          </Topping>
+          <Topping>
+            <Name>Pepperoni</Name>
+            <Price>1</Price>
+          </Topping>
           <Topping>
             <Name>Pepperoni</Name>
             <Price>1</Price>
@@ -158,6 +198,38 @@
             <Name>Mushrooms</Name>
             <Price>0.2</Price>
           </Topping>
+          <Topping>
+            <Name>Onion</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Green peppers</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Black Olives</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Mushrooms</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Onion</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Green peppers</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Black Olives</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Mushrooms</Name>
+            <Price>0.2</Price>
+          </Topping>
         </Toppings>
         <Name>Veggie Pizza</Name>
       </APizza>
@@ -181,11 +253,97 @@
             <Name>Pepperoni</Name>
             <Price>1</Price>
           </Topping>
+          <Topping>
+            <Name>Pepperoni</Name>
+            <Price>1</Price>
+          </Topping>
+          <Topping>
+            <Name>Pepperoni</Name>
+            <Price>1</Price>
+          </Topping>
         </Toppings>
         <Name>Pepperoni Pizza</Name>
       </APizza>
     </Pizzas>
     <StoreName>Chicago Store</StoreName>
     <customerEmail>Mark@y.com</customerEmail>
+  </Order>
+  <Order>
+    <Pizzas>
+      <APizza xsi:type="CustomPizza">
+        <Crust>
+          <Name>Thick</Name>
+          <Price>0.5</Price>
+        </Crust>
+        <Size>
+          <Name>Mdeium</Name>
+          <Price>9.99</Price>
+        </Size>
+        <Toppings>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name />
+            <Price>0</Price>
+          </Topping>
+          <Topping>
+            <Name>Onion</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Green Peppers</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Mushrooms</Name>
+            <Price>0.2</Price>
+          </Topping>
+          <Topping>
+            <Name>Extra Cheese</Name>
+            <Price>0.5</Price>
+          </Topping>
+        </Toppings>
+        <Name>Custom Pizza</Name>
+      </APizza>
+    </Pizzas>
+    <StoreName>Chicago Store</StoreName>
+    <customerEmail>sagar@g.com</customerEmail>
+  </Order>
+  <Order>
+    <Pizzas>
+      <APizza xsi:type="PepperoniPizza">
+        <Crust>
+          <Name>Thick</Name>
+          <Price>0.5</Price>
+        </Crust>
+        <Size>
+          <Name>Large</Name>
+          <Price>13.75</Price>
+        </Size>
+        <Toppings>
+          <Topping>
+            <Name>Pepperoni</Name>
+            <Price>1</Price>
+          </Topping>
+          <Topping>
+            <Name>Pepperoni</Name>
+            <Price>1</Price>
+          </Topping>
+        </Toppings>
+        <Name>Pepperoni Pizza</Name>
+      </APizza>
+    </Pizzas>
+    <StoreName>Chicago Store</StoreName>
+    <customerEmail>sam@g.com</customerEmail>
   </Order>
 </ArrayOfOrder>

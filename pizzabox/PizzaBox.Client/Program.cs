@@ -98,7 +98,7 @@ namespace PizzaBox.Client
                 input = Convert.ToInt32(Console.ReadLine());
                 if (input != 1 && input != 2)
                 {
-                    Console.WriteLine("Please Enter A Valid Option");
+                    Console.WriteLine("Please Enter A Valid Option 1");
                 }
             } while (input != 1 && input != 2);
 
@@ -135,10 +135,7 @@ namespace PizzaBox.Client
                         break;
 
                 }
-                if(input2 != 5){
-                    Console.WriteLine("Please Enter A Valid Option");
-                    break;
-                }
+               
             } while (input2 != 5);
         }
 
@@ -168,7 +165,7 @@ namespace PizzaBox.Client
                     preSetPizza(pizzas[Convert.ToInt32(input3) - 1]);
                     break;
                 default:
-                    Console.WriteLine("Please Select A Valid Option");
+                    Console.WriteLine("Please Select A Valid Option 3");
                     break;
             }
 
@@ -214,7 +211,7 @@ namespace PizzaBox.Client
                 }
                 else
                 {
-                    Console.WriteLine("Please select a valid option");
+                    Console.WriteLine("Please select a valid option  4");
                     --i;
                 }
             }
@@ -295,7 +292,7 @@ namespace PizzaBox.Client
                 Console.WriteLine(p.Name);
             }
 
-            Console.WriteLine("Your Total:  $" + total);
+            Console.WriteLine("Your Total:  $" + Math.Round((Double)total, 2));
 
             Console.WriteLine();
             Console.WriteLine("Please Enter your Name: ");
@@ -324,14 +321,15 @@ namespace PizzaBox.Client
                 Console.WriteLine(p.Name);
             }
 
-            Console.WriteLine("Your Total:  $" + total);
+            Console.WriteLine("Your Total:  $" + Math.Round((Double)total, 2));
         }
         void orderHistory()
         {
             Console.WriteLine();
             Console.WriteLine("Plese Enter your Email ");
             var email = Console.ReadLine();
-
+            Console.WriteLine();
+            Console.WriteLine();
             List<Order> ordersList = OrderSingleton.Instance.myOrders;
 
             foreach (var order in ordersList)
@@ -350,10 +348,11 @@ namespace PizzaBox.Client
                     }
                     Console.WriteLine();
                     var mytotal = order.calcTotal();
-                    Console.WriteLine("Total: $ " + mytotal);
+                    Console.WriteLine("Total: $ " + Math.Round((Double)mytotal, 2));
                 }
 
             }
+            Console.WriteLine();
         }
 
 
@@ -368,6 +367,7 @@ namespace PizzaBox.Client
                 Console.WriteLine(++n + ": " + store);
             }
             int x = Convert.ToInt32(Console.ReadLine());
+             System.Console.WriteLine();
 
             List<Order> ordersList = OrderSingleton.Instance.myOrders;
             Console.WriteLine("Here is the list of Customer with their orders for your store.");
@@ -379,6 +379,7 @@ namespace PizzaBox.Client
                     }
                 }
             }
+            System.Console.WriteLine();
             
         }
 
