@@ -29,12 +29,14 @@ namespace PizzaBox.Client
         {
             System.Console.WriteLine();
             System.Console.WriteLine("******************************************************************************");
+            System.Console.WriteLine();
             System.Console.WriteLine("     - - - - - - - - - - - -  WELCOME TO PizzaBox  - - - - - - - - - - - ");
+            System.Console.WriteLine();
             System.Console.WriteLine("******************************************************************************");
             Console.WriteLine();
-
-            Console.WriteLine("IF YOUR ARE OUR CUSTOMER PLEASE ENTER 1");
-            Console.WriteLine("IF YOUR ARE ONE OF OUR STORE MANAGERS ENTER 2");
+            Console.WriteLine();
+            Console.WriteLine("CUSTOMER PLEASE ENTER 1");
+            Console.WriteLine("STORE MANAGERS ENTER 2");
             Console.WriteLine("TO EXIT THE APPLICATION ENTER 0");
 
             var userIn = Console.ReadLine();
@@ -75,12 +77,6 @@ namespace PizzaBox.Client
         {
             Program p = new Program();
 
-
-            // // print all the stores available, must be from file or db
-            // foreach (var item in ss.Stores)
-            // {
-            //   System.Console.WriteLine(item);
-            // }
             int input;
             do
             {
@@ -176,12 +172,14 @@ namespace PizzaBox.Client
 
             Options(cPizza);
 
-            //string[] toppings = new string[] {"Onion", "Green Peppers", "Mushrooms" };
-            var toppings = new Dictionary<string, double>{ {"Onion", 0.20}, {"Green Peppers", 0.20}, {"Mushrooms", 0.20}, {"Extra Cheese", 0.50},
-                                                       {"Black olives", 0.50}, {"Pepperoni", 1.00}, {"Sausage", 1.00}, {"Bacon", 1.00}};
+            // toppings = new Dictionary<string, double>{ {"Onion", 0.20}, {"Green Peppers", 0.20}, {"Mushrooms", 0.20}, {"Extra Cheese", 0.50},
+            //                                           {"Black olives", 0.50}, {"Pepperoni", 1.00}, {"Sausage", 1.00}, {"Bacon", 1.00}};
             int t;
 
-
+            foreach(var topp in toppings){
+                Console.WriteLine(topp.Name);
+                 Console.WriteLine();
+            }
             for (int i = 0; i < 4; i++)
             {
                 Console.WriteLine();
@@ -206,8 +204,8 @@ namespace PizzaBox.Client
                 }
                 else if (t > 0 && t < 9)
                 {
-                    cPizza.Toppings[i].Name = toppings.ElementAt(t - 1).Key;
-                    cPizza.Toppings[i].Price = toppings.ElementAt(t - 1).Value;
+                    cPizza.Toppings[i].Name = toppings[t-1].Name;
+                    cPizza.Toppings[i].Price = toppings[t-1].Price;
                 }
                 else
                 {
@@ -254,7 +252,7 @@ namespace PizzaBox.Client
             Console.WriteLine("Choose a Size: ");
             Console.WriteLine("1: Small -------- $ 7.00 ");
             Console.WriteLine("2: Medium ------- $ 9.99 ");
-            Console.WriteLine("3: Large -------- $ 12.95 ");
+            Console.WriteLine("3: Large -------- $ 13.75 ");
 
             int s = Convert.ToInt32(Console.ReadLine());
             switch (s)
@@ -315,7 +313,7 @@ namespace PizzaBox.Client
             Order order = new Order(myOrder);
             var total = order.calcTotal();
             Console.WriteLine();
-            Console.WriteLine("List of Pizza that you ordered: ");
+            Console.WriteLine("List of Pizza In your cart: ");
             foreach (var p in myOrder)
             {
                 Console.WriteLine(p.Name);

@@ -34,12 +34,12 @@ namespace PizzaBox.Domain.Singletons
     /// </summary>
     private ToppingSingleton()  //reading from xml
     {
-    //   var fs = new FileStorage();
+      var fs = new FileStorage();
 
-    //   if (topping == null)
-    //   {
-    //     topping = fs.ReadFromXml<Topping>(_path).ToList();
-    //   }
+      if (topping == null)
+      {
+        topping = fs.ReadFromXml<Topping>(_path).ToList();
+      }
     }
 
     public void Seeding()  //writing to xml
