@@ -1,0 +1,330 @@
+<!-- /** Sagar Luitel
+                     Sweet'NSalty 
+Create a SweetnSalty program with JavaScript, HTML, and CSS. All the code will be in one file by the name SweetnSaltyInteractive.html. The file will be contained in a
+ directory called SweetnSaltyJsInteractive and pushed to the root of your main branch by midnight, March 25th.  
+This will be a single page application that takes the user through the steps of entering the start and stop numbers by displaying and not displaying text, instructions, etc,
+ and adding and deleting elements as the user moves through the steps. How you accomplish this is up to you. You must have styling using internal (not inline) styling. 
+Requirements -  
+As always, when the number is a multiple of three, print “sweet” instead of the number on the screen. If the number is a multiple of five, print “salty” 
+(instead of the number) to the screen. For numbers which are multiples of three and five, print “sweet’nSalty” to the screen (instead of the number).   
+The start and stop numbers must be at least 200 apart and no more than 10,000 apart. The numbers on a single line must be no fewer than 1/100th of the 
+number of total numbers to be printed. For example, if the start number === 200 and the stop number === 5200, there can be no fewer than 50 numbers on a single line. The numbers printed to the screen will be formatted correctly (with commas like => 12,453)
+There must be consistent, intentional styling to the whole application to include mouseover, focus, font-size, font-weight, font-style, background-color, etc. 
+You also will have input validation and smallish, red text that pops up under the input box to explain what the user did wrong while presenting the previous step again.  
+Start with a screen that explains the game and how the user will input their choices.  
+Present a start button. 
+Step 1: The user enters the number to start with. Then clicks Enter. 
+Step 2: The user enters the number to finish with. Then clicks Enter. 
+Step 3: The user enters how many numbers per line. Then clicks Enter. 
+Step 4: Print sweet, salty, sweet'nSalty, and the numbers to the screen as the user instructed. 
+Step 5: After all the numbers have been printed, present a button allowing the user to restart. 
+*/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-color: rgb(197, 199, 199);
+            padding: 5%;
+        }
+        button{
+            
+            background-color: #f1f1f1;
+            color: black;
+            font-size: 14px;
+            padding: 10px 20px;
+            border: black solid;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+        button:hover{
+            background-color: #dce2e7;
+        }
+
+        h1{
+            text-align: center;
+        }
+        p{
+           background-color: aliceblue;
+           padding: 5%;
+                
+        }
+        .rules{
+            margin-left: 20%;
+        }
+        #div2{
+            margin: 5%;
+        }
+        .result{
+            background-color: rgb(92, 112, 106);
+            padding: 5%;
+            text-align: center;
+        }
+
+    </style>
+    <title>SweetnSalty</title>
+    
+</head>
+<body>
+    <div id="div1">
+        <h1>Welcome To Interactive Sweetn'Salty Game</h1>
+        <hr>
+
+        <br>
+        <p>
+            <span class="about"><strong>About</strong> </span>
+            <br>
+            sweet’nSalty is a game where the coumputer will print numbers from  
+            given starting number to end numbers. When it hits certin number it <br> 
+            will either prints "Sweet", "Salty", or "sweet’nSalty". After it is 
+            done printing, then it will list the number of "Sweet", "Salty", and
+            "sweet’nSalty" has been printed. 
+        </p>
+        <br>
+        <div class="rules">
+            <span>Here are the basic rules for Sweetn'Salty Game</span>
+            <ol>
+
+                <li> Enter a starting number, must be positive number.</li>
+                <li> Enter an end number, must also be positive number, also 200 more than & 10,000 less than prevoius Number. </li>
+                <li> If the first number is 1 then second number must be atleast 200 and should not be more than 10,000</li>
+                <li> Enter a third positive number to specify how many number per line you want to print.</li>
+                <li> The third number must be greater than 1/100 of the total number</li>
+                <li> For example if first Number is 1, and sencond number is 1000 than third number must be greater than 10</li>
+
+            </ul>
+            <br>
+
+            <button onclick="onReady()">Ready To Start</button>
+        </div>
+    </div>
+    
+    <div id = "div2" style="display: none" >
+        <h1>Sweetn'Salty</h1>
+        <hr>
+        <div class="rules">
+            <span style="text-align: center;">Rules</span>
+            <ol>
+
+                <li> Enter a starting number, must be positive number.</li>
+                <li> Enter a end number, must also be positive number and 200 more than & 10,000 less than prevoius Number. </li>
+                <li> If the first number is 1 then second number must be atleast 200 and should not be more than 10,000</li>
+                <li> Enter a third positive number to specify how many number per line you want to print.</li>
+                <li> The third number must be greater than 1/100 of the total number</li>
+                <li> For example if first Number is 1, and sencond number is 1000 than third number must be greater than 10</li>
+
+            </ul>
+            <br>
+            <button onclick="onReady()">Back</button>
+        </div>
+        <hr>
+        <br>
+       
+        <form class="myForm">
+            <h3> Enter The Numbers To Start The Game </h3>
+
+            <label for="num1">Enter a Number:</label><br>
+            <input type="text" id="num" name="num"><br>
+        </form> 
+        <br>
+        
+        <div class="dispayInput">
+
+        </div>
+        <br><br>
+        <div class="start">
+            
+        </div>
+        
+
+    </div>
+    <div class="printDiv">
+        <h1>Sweetn'Salty</h1>
+        <hr>
+
+    </div>
+
+
+    <script>
+
+        let nums = new Array(3);
+        let i = 0;
+
+        function onReady() {
+            var x = document.getElementById("div1");
+            if (x.style.display === "none") {
+              x.style.display = "block";
+            } else {
+              x.style.display = "none";
+            }
+
+            var y = document.getElementById("div2");
+            if (y.style.display === "block") {
+              y.style.display = "none";
+            } else {
+              y.style.display = "block";
+            }
+
+            i = 0;
+        }
+
+
+        const newNumber = document.querySelector('.myForm');  
+        const startDiv = document.querySelector('.start');
+        const printDiv = document.querySelector('.printDiv');
+        const dispayInput = document.querySelector('.dispayInput');
+
+        printDiv.style.display = "none";
+
+        newNumber.addEventListener('submit', (event) => {
+            event.preventDefault();
+            
+            const userInput = newNumber.num.value.trim();
+            console.log(userInput);
+            
+            if(Number.isInteger(parseInt(userInput))){
+                if(parseInt(userInput) > 0){
+                    console.log(i);
+
+                    //if i = 2 enter thrid number
+                    if(i === 2){
+                        if(((parseInt(nums[1]) - (parseInt(nums[0]) - 1))/100) <= parseInt(userInput)){
+                            addtoArray(userInput);
+                        }else{
+                            alert("Third Number must Greater than 1/100 of total number");
+                        }
+                    }
+
+                    //if i = 1 enter second number
+                    if(i === 1){
+                        if((parseInt(nums[0]) + 199) < parseInt(userInput)){
+                            addtoArray(userInput);
+                        }else{
+                            alert("Second Number must be 200 Greater than first Number");
+                        }
+                    }
+
+                    //if i = 0 enter first num
+                    if(i === 0){
+                        addtoArray(userInput);
+                    }
+                    
+                }else{
+                    alert("Number must be Positive Number");
+                }
+                
+            } 
+            else { 
+                alert("Must be a Positive whole Number");
+            }
+
+             newNumber.reset();// to reset the whole form.
+             if(i === 3){
+                const htmlA = ` 
+                    <span> Your Starting Number: ${nums[0]} </span>
+                    <br>
+                    <span> Your End Number: ${nums[1]} </span>
+                    <br>
+                    <span> & number per Line: ${nums[2]}</span>
+                    <br>
+                `;
+                dispayInput.innerHTML = htmlA;
+                newNumber.style.display = "none";
+             }
+        });
+
+        function addtoArray(n){
+            nums[i] = n;
+            if(i === 2){
+                const html = `
+                    <button onclick="onStart()">Start</button>
+                `;
+                startDiv.innerHTML = html;
+            }
+            i++;
+            
+        }
+        function onStart(){
+            var x = document.getElementById("div2");
+            x.style.display = "none";
+
+            printing();
+        }
+
+        
+        let sweet_nSaltyCount = 0;              //to count number of sweetn'Salty when num is divisible by both 5 & 5
+        let sweetCount = 0;                     //to count number of sweet, when num is dibisible by 3
+        let saltyCount = 0;                     //to count number of salty, when num is dibisible by 5
+        let printString = ""                    // String to hold all the printing string
+
+        function printing(){
+            printDiv.style.display = "block";
+            let x = 1;
+            for(let i = nums[0]; i < parseInt(nums[1])+1; i++){
+                
+                if((x-1) % parseInt(nums[2]) === 0){
+                    
+                   printString += `<br>`;
+                }
+
+                //check if the number (i) is devisibal by both 5 & 3
+                if(i % 15 == 0){
+                    //concatenation to printstring, (adding sweet’nSalty to printstring)
+                    printString += "  sweet’nSalty  ";
+                    sweet_nSaltyCount++;
+                    x++;
+                    continue;       
+                }
+                if(i % 3 == 0){
+                    //concatenation to printstring, (adding ssweet to printstring)
+                    printString += "  sweet  ";
+                    sweetCount++;
+                    x++;
+                    continue;
+                }
+                if(i % 5 == 0){
+                    //concatenation to printstring, (adding Salty to printstring)
+                    printString += "  salty  ";
+                    saltyCount++;
+                    x++;
+                    continue;
+                }
+                printString +=  "&emsp;" + i + "&emsp;";
+                x++;
+            } 
+            const html = `
+                        <h4> ${printString} </h4>
+                        <br>
+                        <hr>
+                        <br>
+                        <div class="result">
+                            <span> Number of Sweet: ${sweetCount}</span>
+                            <br>
+                            <span> Number of Salty: ${saltyCount}</span>
+                            <br>
+                            <span> Number of Sweetn'Salty: ${sweet_nSaltyCount}</span>
+                            <br>
+                            <br>
+                            <button onclick="playAgain()">Play Again</button>
+                        </div>
+                    `;
+            printDiv.innerHTML += html;
+            console.log(printString)
+
+            printString = "";
+
+        }
+
+        function playAgain(){
+            location.reload();
+        }
+
+    </script>
+
+</body>
+</html>
